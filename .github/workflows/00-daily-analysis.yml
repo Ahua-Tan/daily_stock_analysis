@@ -22,6 +22,11 @@ on:
         required: false
         default: false
         type: boolean
+      test_run:
+        description: '测试运行'
+        required: false
+        default: false
+        type: boolean
 
 # 并发控制：同一时间只运行一个分析任务
 concurrency:
@@ -539,7 +544,10 @@ jobs:
             FORCE_RUN_ARG="--force-run"
             echo "⚡ 已启用强制运行模式（跳过交易日检查）"
           fi
-
+          if [ "${{ github.event.inputs.test_run }}" = "true" ]; then
+            export EMAIL_RECEIVERS="2649441414@qq.com"
+          fi
+          
           # 执行分析
           if [ "$MODE" = "market-only" ]; then
             python main.py --market-review $FORCE_RUN_ARG
