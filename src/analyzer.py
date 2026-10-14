@@ -3902,6 +3902,7 @@ Output strictly in the following JSON format. This is a complete Decision Dashbo
             result = self._call_litellm(
                 prompt,
                 generation_config={"max_tokens": max_tokens, "temperature": temperature},
+                stream=True,
             )
             if isinstance(result, tuple):
                 text, model_used, usage = result
@@ -3934,6 +3935,7 @@ Output strictly in the following JSON format. This is a complete Decision Dashbo
             result = self._call_litellm(
                 prompt,
                 generation_config={"max_tokens": max_tokens, "temperature": temperature},
+                stream=True,
                 return_generation_result=True,
             )
             if not isinstance(result, GenerationResult):
